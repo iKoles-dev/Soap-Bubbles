@@ -4,7 +4,6 @@ Shader "Custom/Brighter"
     {
         _StartColor ("Start Color", Color) = (0, 0, 0, 1)
         _EndColor ("End Color", Color) = (1, 1, 1, 1)
-        _ScreenHeight ("Screen Height", Float) = 1080
     }
     SubShader
     {
@@ -21,7 +20,6 @@ Shader "Custom/Brighter"
             
             fixed4 _StartColor;
             fixed4 _EndColor;
-            float _ScreenHeight;
             
             float4 vert(float4 vertexPosition:POSITION):POSITION
             {
@@ -30,7 +28,7 @@ Shader "Custom/Brighter"
 
             float4 frag(UNITY_VPOS_TYPE screenPos : VPOS):SV_Target
             {
-                 return lerp(_StartColor, _EndColor, screenPos.y/_ScreenHeight);
+                 return lerp(_StartColor, _EndColor, screenPos.y/_ScreenParams.y);
             }
             ENDCG
         }
