@@ -7,12 +7,12 @@ namespace CodeBase.Infrastructure.ObjectPools
     {
         public BubblePool(BubblePreferences bubblePreferences)
         {
-            Fill(bubblePreferences.Amount, bubblePreferences.BubblePrefab);
+            Fill(bubblePreferences.PoolSize, bubblePreferences.BubblePrefab);
         }
 
         protected override GameObject CreateObject(GameObject prefab)
         {
-            return GameObject.Instantiate(prefab);
+            return Object.Instantiate(prefab);
         }
 
         protected override void Deactivate(GameObject obj)

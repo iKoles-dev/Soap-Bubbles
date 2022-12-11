@@ -6,7 +6,7 @@ namespace CodeBase.Infrastructure.StaticData
     public class BubblePreferences : ScriptableObject
     {
         public GameObject BubblePrefab;
-        public int Amount;
+        public int PoolSize;
         public float MinSpeed;
         public float MaxSpeed;
         public float MinSize;
