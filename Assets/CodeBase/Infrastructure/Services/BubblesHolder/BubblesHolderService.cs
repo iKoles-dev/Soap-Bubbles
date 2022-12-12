@@ -5,12 +5,12 @@ using CodeBase.SoapBubble;
 
 namespace CodeBase.Infrastructure.Services.BubblesHolder
 {
-    public class BubblesHolder : IResettable, IBubblesHolder
+    public class BubblesHolderService : IResettable, IBubblesHolder
     {
         private readonly BubblePool _bubblePool;
         private readonly List<ComponentsHolder> _componentsHolders = new();
 
-        public BubblesHolder(BubblePool bubblePool) => 
+        public BubblesHolderService(BubblePool bubblePool) => 
             _bubblePool = bubblePool;
 
         public void CustomReset()

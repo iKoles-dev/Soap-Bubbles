@@ -13,10 +13,11 @@ namespace CodeBase.Infrastructure.Services.OutScreenPositioner
             _borderSize = orthographicSize * Screen.width / Screen.height;
             _downBorder = - orthographicSize;
         }
-        public void SetOnPosition(ComponentsHolder holder)
+        public void SetPosition(ComponentsHolder holder)
         {
-            float halfSize = holder.Transform.localScale.x / 2;
-            holder.Transform.position = new Vector3(Mathf.Lerp(-_borderSize + halfSize, _borderSize - halfSize, Random.value), _downBorder - halfSize, 0);
+            float xPosition = Mathf.Lerp(-_borderSize + holder.Radius, _borderSize - holder.Radius, Random.value);
+            float yPosition = _downBorder - holder.Radius;
+            holder.Transform.position = new Vector3(xPosition, yPosition);
         }
     }
 }

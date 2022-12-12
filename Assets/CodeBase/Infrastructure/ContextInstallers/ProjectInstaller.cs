@@ -3,9 +3,11 @@ using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.ObjectPools;
 using CodeBase.Infrastructure.Services.BubblesHolder;
 using CodeBase.Infrastructure.Services.BubbleSpawner;
+using CodeBase.Infrastructure.Services.ClickDetector;
 using CodeBase.Infrastructure.Services.GameSpeedMultiplier;
 using CodeBase.Infrastructure.Services.Move;
 using CodeBase.Infrastructure.Services.OutScreenPositioner;
+using CodeBase.Infrastructure.Services.OutScreenRemover;
 using CodeBase.Infrastructure.Services.SizeRandomizer;
 using CodeBase.Infrastructure.StaticData;
 using Zenject;
@@ -28,11 +30,18 @@ namespace CodeBase.Infrastructure.ContextInstallers
             BindBubbleFactory();
             BindBubblesHolder();
             BindMoveService();
+            BindClickDetector();
+            BindOutScreenRemover();
         }
+
+        private void BindClickDetector() =>
+            Container
+                .BindInterfacesAndSelfTo<ClickDetectorService>()
+                .AsSingle();
 
         private void BindBubblesHolder() =>
             Container
-                .BindInterfacesAndSelfTo<BubblesHolder>()
+                .BindInterfacesAndSelfTo<BubblesHolderService>()
                 .AsSingle();
 
         private void BindGameSpeedMultiplier() =>
@@ -91,6 +100,12 @@ namespace CodeBase.Infrastructure.ContextInstallers
         private void BindMoveService() =>
             Container
                 .BindInterfacesAndSelfTo<MoveService>()
+                .AsSingle()
+                .NonLazy();
+
+        private void BindOutScreenRemover() =>
+            Container
+                .BindInterfacesAndSelfTo<OutScreenRemoverService>()
                 .AsSingle()
                 .NonLazy();
     }

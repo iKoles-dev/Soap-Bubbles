@@ -21,7 +21,7 @@ namespace CodeBase.Infrastructure.Factories
         {
             ComponentsHolder bubble = _bubblePool.Get();
             _sizeAndSpeedRandomizerService.RandomizeSizeAndSpeed(bubble);
-            _outScreenPositionerService.SetOnPosition(bubble);
+            _outScreenPositionerService.SetPosition(bubble);
             return bubble;
         }
     }

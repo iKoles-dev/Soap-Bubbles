@@ -18,6 +18,7 @@ namespace CodeBase.Infrastructure.Services.SizeRandomizer
             float sizeModificator = Mathf.Lerp(_spawnPreferences.MinSize, _spawnPreferences.MaxSize, randomValue);
             Vector3 targetSize = Vector3.one * sizeModificator;
             componentsHolder.Transform.localScale = targetSize;
+            componentsHolder.Radius = sizeModificator / 2;
             componentsHolder.Speed = Mathf.Lerp(_spawnPreferences.MaxSpeed, _spawnPreferences.MinSpeed, randomValue);
         }
     }

@@ -7,6 +7,8 @@ namespace CodeBase.SoapBubble
         public GameObject GameObject;
         public Transform Transform;
         public float Speed;
+        public float Radius;
+
 
         public ComponentsHolder(Bubble bubble)
         {
