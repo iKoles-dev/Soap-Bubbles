@@ -5,10 +5,13 @@ namespace CodeBase.Infrastructure.ObjectPools
 {
     public class BubblePool : BasePool<GameObject>
     {
-        public BubblePool(BubblePreferences bubblePreferences)
-        {
-            Fill(bubblePreferences.PoolSize, bubblePreferences.BubblePrefab);
-        }
+        private readonly BubblePreferences _bubblePreferences;
+
+        public BubblePool(BubblePreferences bubblePreferences) => 
+            _bubblePreferences = bubblePreferences;
+
+        public void Initialize() => 
+            Fill(_bubblePreferences.PoolSize, _bubblePreferences.BubblePrefab);
 
         protected override GameObject CreateObject(GameObject prefab)
         {

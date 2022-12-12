@@ -20,7 +20,6 @@ namespace CodeBase.Infrastructure.ContextInstallers
         private void BindBubblePool() =>
             Container
                 .BindInterfacesAndSelfTo<BubblePool>()
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
     }
 }
