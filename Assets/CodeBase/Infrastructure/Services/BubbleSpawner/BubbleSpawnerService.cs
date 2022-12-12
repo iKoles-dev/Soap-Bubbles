@@ -1,6 +1,8 @@
 ﻿using System;
+using CodeBase.ECS.SoapBubble.Components;
 using CodeBase.Infrastructure.ObjectPools;
 using CodeBase.Infrastructure.StaticData;
+using Leopotam.Ecs;
 using UniRx;
 using Random = UnityEngine.Random;
 
@@ -10,7 +12,7 @@ namespace CodeBase.Infrastructure.Services.BubbleSpawner
     {
         private readonly SpawnerPreferences _spawnerPreferences;
         private readonly BubblePool _bubblePool;
-        private CompositeDisposable _disposables;
+        private readonly CompositeDisposable _disposables = new();
 
         public BubbleSpawnerService(SpawnerPreferences spawnerPreferences, BubblePool bubblePool)
         {
@@ -21,12 +23,13 @@ namespace CodeBase.Infrastructure.Services.BubbleSpawner
         public void StartSpawn()
         {
             Observable
-                .Timer(TimeSpan.FromMilliseconds(1 / _spawnerPreferences.BubblesPerSecond))
+                .Timer(TimeSpan.FromSeconds(1 / _spawnerPreferences.BubblesPerSecond))
                 .Repeat()
                 .Subscribe(_ =>
                 {
-                    var bubble = _bubblePool.Get();
-                    bubble.transform.position = Random.onUnitSphere;
+                    EcsEntity bubble = _bubblePool.Get();
+                    ref TransformComponent transform = ref bubble.Get<TransformComponent>();
+                    transform.Transform.position = Random.onUnitSphere;
                 })
                 .AddTo(_disposables);
         }

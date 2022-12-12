@@ -5,14 +5,14 @@ namespace CodeBase.ECS
 {
     public class EcsStartup : ITickable
     {
-        private EcsWorld _world;
+        public EcsWorld World;
         private EcsSystems _systems;
 
         [Inject]
         private void Construct()
         {
-            _world = new EcsWorld();
-            _systems = new EcsSystems(_world);
+            World = new EcsWorld();
+            _systems = new EcsSystems(World);
             
             // _systems
             //     .OneFrame<AddVFX>()

@@ -2,8 +2,8 @@
 
 namespace CodeBase.ECS.SoapBubble.Components
 {
-    public struct ColliderComponent
+    public struct GameObjectComponent
     {
-        public Collider Collider;
+        public GameObject GameObject;
     }
 }

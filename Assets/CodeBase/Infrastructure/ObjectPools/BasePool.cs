@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.ObjectPools
 {
-    public abstract class BasePool<TObject>
+    public abstract class BasePool<TPrefab, TObject>
     {
         private readonly Stack<TObject> _pool = new();
-        private TObject _prefab;
+        private TPrefab _prefab;
 
         public TObject Get()
         {
             if (_pool.Any() == false)
             {
-                CreateObjectInstance();
+                return CreateObject(_prefab);
             }
             TObject obj = _pool.Pop();
             Activate(obj);
@@ -26,23 +25,18 @@ namespace CodeBase.Infrastructure.ObjectPools
             _pool.Push(obj);
         }
 
-        protected void Fill(int size, TObject prefab)
+        protected void Fill(int size, TPrefab prefab)
         {
             _prefab = prefab;
             for (var i = 0; i < size; i++)
             {
-                CreateObjectInstance();
+                TObject obj = CreateObject(_prefab);
+                Deactivate(obj);
+                _pool.Push(obj);
             }
         }
 
-        private void CreateObjectInstance()
-        {
-            TObject obj = CreateObject(_prefab);
-            Deactivate(obj);
-            _pool.Push(obj);
-        }
-
-        protected abstract TObject CreateObject(TObject prefab);
+        protected abstract TObject CreateObject(TPrefab prefab);
         protected abstract void Deactivate(TObject obj);
         protected abstract void Activate(TObject obj);
     }
