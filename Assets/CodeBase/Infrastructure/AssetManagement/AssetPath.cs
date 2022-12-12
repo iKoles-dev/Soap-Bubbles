@@ -6,5 +6,6 @@
         public const string TapToStart = "UI/TapToStart";
         public const string SpawnerPreferences = "Preferences/SpawnerPreferences";
         public const string GamePreferences = "Preferences/GamePreferences";
+        public const string VFXImpact = "VFX/Impact";
     }
 }

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GamePreferences
   m_EditorClassIdentifier: 
   SpeedUpFactor: 1.2
-  SpeedUpTimer: 1
+  SpeedUpTimer: 3
+  RoundDuration: 20

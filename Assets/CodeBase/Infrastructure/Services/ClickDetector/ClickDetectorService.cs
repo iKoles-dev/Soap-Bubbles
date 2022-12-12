@@ -1,4 +1,5 @@
 ﻿using CodeBase.Infrastructure.Services.BubblesHolder;
+using CodeBase.Infrastructure.Services.ImpactSpawner;
 using CodeBase.SoapBubble;
 using UniRx;
 using UnityEngine;
@@ -9,13 +10,15 @@ namespace CodeBase.Infrastructure.Services.ClickDetector
     {
         private const float MaxRayDistance = 10;
         private readonly BubblesHolderService _bubblesHolderService;
+        private readonly ImpactSpawnerService _impactSpawnerService;
         private readonly Camera _camera;
         private readonly RaycastHit[] _raycastHits = new RaycastHit[20];
         private readonly CompositeDisposable _compositeDisposable = new();
 
-        public ClickDetectorService(BubblesHolderService bubblesHolderService)
+        public ClickDetectorService(BubblesHolderService bubblesHolderService, ImpactSpawnerService impactSpawnerService)
         {
             _bubblesHolderService = bubblesHolderService;
+            _impactSpawnerService = impactSpawnerService;
             _camera = Camera.main;
         }
         public void StartDetecting()
@@ -42,6 +45,7 @@ namespace CodeBase.Infrastructure.Services.ClickDetector
                     if (hit.collider.TryGetComponent(out Bubble bubble))
                     {
                         _bubblesHolderService.Remove(bubble.ComponentsHolder);
+                        _impactSpawnerService.Spawn(bubble.ComponentsHolder.Transform.position);
                     }
                 }
             }

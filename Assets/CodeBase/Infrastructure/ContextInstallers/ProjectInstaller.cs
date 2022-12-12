@@ -5,6 +5,7 @@ using CodeBase.Infrastructure.Services.BubblesHolder;
 using CodeBase.Infrastructure.Services.BubbleSpawner;
 using CodeBase.Infrastructure.Services.ClickDetector;
 using CodeBase.Infrastructure.Services.GameSpeedMultiplier;
+using CodeBase.Infrastructure.Services.ImpactSpawner;
 using CodeBase.Infrastructure.Services.Move;
 using CodeBase.Infrastructure.Services.OutScreenPositioner;
 using CodeBase.Infrastructure.Services.OutScreenRemover;
@@ -32,6 +33,8 @@ namespace CodeBase.Infrastructure.ContextInstallers
             BindMoveService();
             BindClickDetector();
             BindOutScreenRemover();
+            BindImpactPool();
+            BindImpactSpawner();
         }
 
         private void BindClickDetector() =>
@@ -108,5 +111,15 @@ namespace CodeBase.Infrastructure.ContextInstallers
                 .BindInterfacesAndSelfTo<OutScreenRemoverService>()
                 .AsSingle()
                 .NonLazy();
+
+        private void BindImpactPool() =>
+            Container
+                .BindInterfacesAndSelfTo<ImpactPool>()
+                .AsSingle();
+
+        private void BindImpactSpawner() =>
+            Container
+                .BindInterfacesAndSelfTo<ImpactSpawnerService>()
+                .AsSingle();
     }
 }
