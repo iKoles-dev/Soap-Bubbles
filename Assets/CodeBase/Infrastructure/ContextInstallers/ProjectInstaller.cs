@@ -1,4 +1,6 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.ObjectPools;
+using CodeBase.Infrastructure.Services.BubbleSpawner;
 using CodeBase.Infrastructure.StaticData;
 using Zenject;
 
@@ -10,6 +12,9 @@ namespace CodeBase.Infrastructure.ContextInstallers
         {
             BindAssetProvider();
             BindBubblePreferences();
+            BindBubblePool();
+            BindBubbleSpawner();
+            BindSpawnerPreferences();
         }
 
         private void BindBubblePreferences() =>
@@ -21,6 +26,22 @@ namespace CodeBase.Infrastructure.ContextInstallers
         private void BindAssetProvider() =>
             Container
                 .BindInterfacesAndSelfTo<AssetProvider>()
+                .AsSingle();
+
+        private void BindBubblePool() =>
+            Container
+                .BindInterfacesAndSelfTo<BubblePool>()
+                .AsSingle();
+
+        private void BindBubbleSpawner() =>
+            Container
+                .BindInterfacesAndSelfTo<BubbleSpawnerService>()
+                .AsSingle();
+
+        private void BindSpawnerPreferences() =>
+            Container
+                .BindInterfacesAndSelfTo<SpawnerPreferences>()
+                .FromResource(AssetPath.SpawnerPreferences)
                 .AsSingle();
     }
 }
