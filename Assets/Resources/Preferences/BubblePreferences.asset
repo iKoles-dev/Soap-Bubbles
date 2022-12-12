@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a43471e5034c6a8aab7a7a4013d4a9, type: 3}
   m_Name: BubblePreferences
   m_EditorClassIdentifier: 
-  BubblePrefab: {fileID: 4337563963034794217, guid: f6675f42980e56b41bb8e16dae84859a, type: 3}
+  BubblePrefab: {fileID: 3355761984674308256, guid: f6675f42980e56b41bb8e16dae84859a, type: 3}
   PoolSize: 20
-  MinSpeed: 0
-  MaxSpeed: 0
-  MinSize: 0
-  MaxSize: 0

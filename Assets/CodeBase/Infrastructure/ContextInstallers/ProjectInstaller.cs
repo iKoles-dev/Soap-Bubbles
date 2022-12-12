@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.ObjectPools;
 using CodeBase.Infrastructure.Services.BubbleSpawner;
+using CodeBase.Infrastructure.Services.OutScreenPositioner;
 using CodeBase.Infrastructure.StaticData;
 using Zenject;
 
@@ -17,6 +18,7 @@ namespace CodeBase.Infrastructure.ContextInstallers
             BindBubbleSpawner();
             BindSpawnerPreferences();
             BindECS();
+            BindOutScreenPositioner();
         }
 
         private void BindBubblePreferences() =>
@@ -51,5 +53,10 @@ namespace CodeBase.Infrastructure.ContextInstallers
                 .BindInterfacesAndSelfTo<EcsStartup>()
                 .AsSingle()
                 .NonLazy();
+
+        private void BindOutScreenPositioner() =>
+            Container
+                .BindInterfacesAndSelfTo<OutScreenPositionerService>()
+                .AsSingle();
     }
 }

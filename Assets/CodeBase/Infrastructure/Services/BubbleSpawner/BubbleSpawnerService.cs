@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.ECS.SoapBubble.Components;
 using CodeBase.Infrastructure.ObjectPools;
+using CodeBase.Infrastructure.Services.OutScreenPositioner;
 using CodeBase.Infrastructure.StaticData;
 using Leopotam.Ecs;
 using UniRx;
@@ -12,12 +13,14 @@ namespace CodeBase.Infrastructure.Services.BubbleSpawner
     {
         private readonly SpawnerPreferences _spawnerPreferences;
         private readonly BubblePool _bubblePool;
+        private readonly OutScreenPositionerService _outScreenPositionerService;
         private readonly CompositeDisposable _disposables = new();
 
-        public BubbleSpawnerService(SpawnerPreferences spawnerPreferences, BubblePool bubblePool)
+        public BubbleSpawnerService(SpawnerPreferences spawnerPreferences, BubblePool bubblePool, OutScreenPositionerService outScreenPositionerService)
         {
             _spawnerPreferences = spawnerPreferences;
             _bubblePool = bubblePool;
+            _outScreenPositionerService = outScreenPositionerService;
         }
 
         public void StartSpawn()
@@ -28,8 +31,7 @@ namespace CodeBase.Infrastructure.Services.BubbleSpawner
                 .Subscribe(_ =>
                 {
                     EcsEntity bubble = _bubblePool.Get();
-                    ref TransformComponent transform = ref bubble.Get<TransformComponent>();
-                    transform.Transform.position = Random.onUnitSphere;
+                    _outScreenPositionerService.SetOnPosition(bubble);
                 })
                 .AddTo(_disposables);
         }
