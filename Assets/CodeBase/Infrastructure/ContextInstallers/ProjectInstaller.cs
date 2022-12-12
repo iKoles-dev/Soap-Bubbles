@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.AssetManagement;
+﻿using CodeBase.ECS;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.ObjectPools;
 using CodeBase.Infrastructure.Services.BubbleSpawner;
 using CodeBase.Infrastructure.StaticData;
@@ -15,6 +16,7 @@ namespace CodeBase.Infrastructure.ContextInstallers
             BindBubblePool();
             BindBubbleSpawner();
             BindSpawnerPreferences();
+            BindECS();
         }
 
         private void BindBubblePreferences() =>
@@ -43,5 +45,11 @@ namespace CodeBase.Infrastructure.ContextInstallers
                 .BindInterfacesAndSelfTo<SpawnerPreferences>()
                 .FromResource(AssetPath.SpawnerPreferences)
                 .AsSingle();
+
+        private void BindECS() =>
+            Container
+                .BindInterfacesAndSelfTo<EcsStartup>()
+                .AsSingle()
+                .NonLazy();
     }
 }
