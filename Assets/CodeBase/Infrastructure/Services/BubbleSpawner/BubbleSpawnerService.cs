@@ -1,42 +1,40 @@
 ﻿using System;
-using CodeBase.ECS.SoapBubble.Components;
-using CodeBase.Infrastructure.ObjectPools;
-using CodeBase.Infrastructure.Services.OutScreenPositioner;
+using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Services.BubblesHolder;
 using CodeBase.Infrastructure.StaticData;
-using Leopotam.Ecs;
+using CodeBase.SoapBubble;
 using UniRx;
-using Random = UnityEngine.Random;
 
 namespace CodeBase.Infrastructure.Services.BubbleSpawner
 {
     public class BubbleSpawnerService
     {
-        private readonly SpawnerPreferences _spawnerPreferences;
-        private readonly BubblePool _bubblePool;
-        private readonly OutScreenPositionerService _outScreenPositionerService;
+        private readonly SpawnPreferences _spawnPreferences;
+        private readonly BubbleFactory _bubbleFactory;
+        private readonly IBubblesHolder _bubblesHolder;
         private readonly CompositeDisposable _disposables = new();
 
-        public BubbleSpawnerService(SpawnerPreferences spawnerPreferences, BubblePool bubblePool, OutScreenPositionerService outScreenPositionerService)
+        public BubbleSpawnerService(SpawnPreferences spawnPreferences, BubbleFactory bubbleFactory, IBubblesHolder bubblesHolder)
         {
-            _spawnerPreferences = spawnerPreferences;
-            _bubblePool = bubblePool;
-            _outScreenPositionerService = outScreenPositionerService;
+            _spawnPreferences = spawnPreferences;
+            _bubbleFactory = bubbleFactory;
+            _bubblesHolder = bubblesHolder;
         }
 
-        public void StartSpawn()
-        {
+        public void StartSpawn() =>
             Observable
-                .Timer(TimeSpan.FromSeconds(1 / _spawnerPreferences.BubblesPerSecond))
+                .Timer(TimeSpan.FromSeconds(1 / _spawnPreferences.BubblesPerSecond))
                 .Repeat()
-                .Subscribe(_ =>
-                {
-                    EcsEntity bubble = _bubblePool.Get();
-                    _outScreenPositionerService.SetOnPosition(bubble);
-                })
+                .Subscribe(_ => SpawnEntity())
                 .AddTo(_disposables);
-        }
 
         public void StopSpawn() => 
             _disposables.Clear();
+
+        private void SpawnEntity()
+        {
+            ComponentsHolder bubble = _bubbleFactory.CreateBubble();
+            _bubblesHolder.Add(bubble);
+        }
     }
 }

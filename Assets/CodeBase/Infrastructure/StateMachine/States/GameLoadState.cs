@@ -18,7 +18,7 @@ namespace CodeBase.Infrastructure.StateMachine.States
         public override void Enter()
         {
             _bubblePool.Initialize();
-            GameLoopStateMachine.Enter<MenuState>();
+            GameLoopStateMachine.Enter<ResetState>();
         }
 
         public override void Exit()

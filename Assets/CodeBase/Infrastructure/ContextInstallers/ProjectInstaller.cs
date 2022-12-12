@@ -1,8 +1,12 @@
-﻿using CodeBase.ECS;
-using CodeBase.Infrastructure.AssetManagement;
+﻿using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.ObjectPools;
+using CodeBase.Infrastructure.Services.BubblesHolder;
 using CodeBase.Infrastructure.Services.BubbleSpawner;
+using CodeBase.Infrastructure.Services.GameSpeedMultiplier;
+using CodeBase.Infrastructure.Services.Move;
 using CodeBase.Infrastructure.Services.OutScreenPositioner;
+using CodeBase.Infrastructure.Services.SizeRandomizer;
 using CodeBase.Infrastructure.StaticData;
 using Zenject;
 
@@ -17,9 +21,24 @@ namespace CodeBase.Infrastructure.ContextInstallers
             BindBubblePool();
             BindBubbleSpawner();
             BindSpawnerPreferences();
-            BindECS();
             BindOutScreenPositioner();
+            BindSizeRandomizer();
+            BindGamePreferences();
+            BindGameSpeedMultiplier();
+            BindBubbleFactory();
+            BindBubblesHolder();
+            BindMoveService();
         }
+
+        private void BindBubblesHolder() =>
+            Container
+                .BindInterfacesAndSelfTo<BubblesHolder>()
+                .AsSingle();
+
+        private void BindGameSpeedMultiplier() =>
+            Container
+                .BindInterfacesAndSelfTo<GameGameSpeedMultiplierService>()
+                .AsSingle();
 
         private void BindBubblePreferences() =>
             Container
@@ -44,19 +63,35 @@ namespace CodeBase.Infrastructure.ContextInstallers
 
         private void BindSpawnerPreferences() =>
             Container
-                .BindInterfacesAndSelfTo<SpawnerPreferences>()
+                .BindInterfacesAndSelfTo<SpawnPreferences>()
                 .FromResource(AssetPath.SpawnerPreferences)
                 .AsSingle();
-
-        private void BindECS() =>
-            Container
-                .BindInterfacesAndSelfTo<EcsStartup>()
-                .AsSingle()
-                .NonLazy();
 
         private void BindOutScreenPositioner() =>
             Container
                 .BindInterfacesAndSelfTo<OutScreenPositionerService>()
                 .AsSingle();
+
+        private void BindSizeRandomizer() =>
+            Container
+                .BindInterfacesAndSelfTo<SizeAndSpeedRandomizerService>()
+                .AsSingle();
+
+        private void BindGamePreferences() =>
+            Container
+                .BindInterfacesAndSelfTo<GamePreferences>()
+                .FromResource(AssetPath.GamePreferences)
+                .AsSingle();
+
+        private void BindBubbleFactory() =>
+            Container
+                .BindInterfacesAndSelfTo<BubbleFactory>()
+                .AsSingle();
+
+        private void BindMoveService() =>
+            Container
+                .BindInterfacesAndSelfTo<MoveService>()
+                .AsSingle()
+                .NonLazy();
     }
 }

@@ -18,6 +18,7 @@ namespace CodeBase.Infrastructure.StateMachine.States
             {
                 resettable.CustomReset();
             }
+
             GameLoopStateMachine.Enter<MenuState>();
         }
 

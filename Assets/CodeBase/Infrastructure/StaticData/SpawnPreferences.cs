@@ -2,8 +2,8 @@
 
 namespace CodeBase.Infrastructure.StaticData
 {
-    [CreateAssetMenu(fileName = "SpawnerPreferences", menuName = "Preferences/Create Spawner Preferences")]
-    public class SpawnerPreferences : ScriptableObject
+    [CreateAssetMenu(fileName = "SpawnPreferences", menuName = "Preferences/Create Spawn Preferences")]
+    public class SpawnPreferences : ScriptableObject
     {
         public float BubblesPerSecond;
         public float MinSpeed;

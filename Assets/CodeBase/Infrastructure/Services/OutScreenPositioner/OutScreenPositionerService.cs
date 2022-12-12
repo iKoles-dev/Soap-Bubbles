@@ -1,5 +1,4 @@
-﻿using CodeBase.ECS.SoapBubble.Components;
-using Leopotam.Ecs;
+﻿using CodeBase.SoapBubble;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.OutScreenPositioner
@@ -14,12 +13,10 @@ namespace CodeBase.Infrastructure.Services.OutScreenPositioner
             _borderSize = orthographicSize * Screen.width / Screen.height;
             _downBorder = - orthographicSize;
         }
-        public void SetOnPosition(EcsEntity ecsEntity)
+        public void SetOnPosition(ComponentsHolder holder)
         {
-            ref ColliderComponent colliderComponent = ref ecsEntity.Get<ColliderComponent>();
-            float halfSize = colliderComponent.Collider.bounds.size.x / 2;
-            ref TransformComponent transformComponent = ref ecsEntity.Get<TransformComponent>();
-            transformComponent.Transform.position = new Vector3(Mathf.Lerp(-_borderSize + halfSize, _borderSize - halfSize, Random.value), _downBorder - halfSize, 0);
+            float halfSize = holder.Transform.localScale.x / 2;
+            holder.Transform.position = new Vector3(Mathf.Lerp(-_borderSize + halfSize, _borderSize - halfSize, Random.value), _downBorder - halfSize, 0);
         }
     }
 }
