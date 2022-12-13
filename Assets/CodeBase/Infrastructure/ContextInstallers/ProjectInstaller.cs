@@ -31,16 +31,11 @@ namespace CodeBase.Infrastructure.ContextInstallers
             BindBubbleFactory();
             BindBubblesHolder();
             BindMoveService();
-            BindClickDetector();
             BindOutScreenRemover();
             BindImpactPool();
             BindImpactSpawner();
         }
 
-        private void BindClickDetector() =>
-            Container
-                .BindInterfacesAndSelfTo<ClickDetectorService>()
-                .AsSingle();
 
         private void BindBubblesHolder() =>
             Container

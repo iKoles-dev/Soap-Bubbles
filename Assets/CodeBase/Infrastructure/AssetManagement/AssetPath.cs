@@ -7,5 +7,6 @@
         public const string SpawnerPreferences = "Preferences/SpawnerPreferences";
         public const string GamePreferences = "Preferences/GamePreferences";
         public const string VFXImpact = "VFX/Impact";
+        public const string DeathCounter = "UI/DeathCounter";
     }
 }

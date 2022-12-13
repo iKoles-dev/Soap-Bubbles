@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.StateMachine;
+﻿using CodeBase.Infrastructure.Services.ClickDetector;
+using CodeBase.Infrastructure.StateMachine;
 using Zenject;
 
 namespace CodeBase.Infrastructure.ContextInstallers
@@ -8,11 +9,16 @@ namespace CodeBase.Infrastructure.ContextInstallers
         public override void InstallBindings()
         {
             BindGameStateMachine();
+            BindClickDetector();
         }
 
         private void BindGameStateMachine() =>
             Container
                 .BindInterfacesAndSelfTo<GameLoopStateMachine>()
+                .AsSingle();
+        private void BindClickDetector() =>
+            Container
+                .BindInterfacesAndSelfTo<ClickDetectorService>()
                 .AsSingle();
     }
 }
