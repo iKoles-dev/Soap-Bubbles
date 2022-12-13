@@ -4,8 +4,8 @@ namespace CodeBase.SoapBubble
 {
     public class ComponentsHolder
     {
-        public GameObject GameObject;
-        public Transform Transform;
+        public readonly GameObject GameObject;
+        public readonly Transform Transform;
         public float Speed;
         public float Radius;
         public float Points;

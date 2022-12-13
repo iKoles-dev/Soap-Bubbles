@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Services.TapToStart
+namespace CodeBase.Infrastructure.Services.UI.TapToStart
 {
     [RequireComponent(typeof(Canvas))]
     public class TapToStartService : MonoBehaviour

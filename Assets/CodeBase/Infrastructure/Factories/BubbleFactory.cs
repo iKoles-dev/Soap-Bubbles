@@ -20,7 +20,7 @@ namespace CodeBase.Infrastructure.Factories
         public ComponentsHolder CreateBubble()
         {
             ComponentsHolder bubble = _bubblePool.Get();
-            _bubbleParametresRandomizerService.RandomizeParametresSpeed(bubble);
+            _bubbleParametresRandomizerService.RandomizeParametres(bubble);
             _outScreenPositionerService.SetPosition(bubble);
             return bubble;
         }

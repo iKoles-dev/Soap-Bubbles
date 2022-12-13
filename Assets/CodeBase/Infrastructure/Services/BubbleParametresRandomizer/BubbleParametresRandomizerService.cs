@@ -12,7 +12,7 @@ namespace CodeBase.Infrastructure.Services.BubbleParametresRandomizer
         {
             _spawnPreferences = spawnPreferences;
         }
-        public void RandomizeParametresSpeed(ComponentsHolder componentsHolder)
+        public void RandomizeParametres(ComponentsHolder componentsHolder)
         {
             float randomValue = Random.value;
             float sizeModificator = Mathf.Lerp(_spawnPreferences.MinSize, _spawnPreferences.MaxSize, randomValue);

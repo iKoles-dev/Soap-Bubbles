@@ -1,6 +1,4 @@
-﻿using System;
-using CodeBase.Infrastructure.AssetManagement;
-using CodeBase.Infrastructure.StateMachine;
+﻿using CodeBase.Infrastructure.StateMachine;
 using CodeBase.Infrastructure.StateMachine.States;
 using CodeBase.Infrastructure.StaticData;
 using TMPro;

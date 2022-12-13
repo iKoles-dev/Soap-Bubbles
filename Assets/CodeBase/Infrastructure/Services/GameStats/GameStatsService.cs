@@ -5,7 +5,7 @@ namespace CodeBase.Infrastructure.Services.GameStats
 {
     public class GameStatsService : IResettable
     {
-        public IntReactiveProperty Deaths = new();
+        public readonly IntReactiveProperty Deaths = new();
         public float Points;
 
         public void CustomReset()

@@ -1,4 +1,4 @@
-using CodeBase.Infrastructure.Services.TapToStart;
+using CodeBase.Infrastructure.Services.UI.TapToStart;
 using Zenject;
 
 namespace CodeBase.Infrastructure.StateMachine.States

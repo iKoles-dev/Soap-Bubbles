@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace CodeBase.Infrastructure.Services.TapToStart
+namespace CodeBase.Infrastructure.Services.UI.TapToStart
 {
     public class TapToStartButton : MonoBehaviour, IPointerDownHandler
     {

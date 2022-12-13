@@ -25,10 +25,8 @@ namespace CodeBase.Infrastructure.Services.ClickDetector
                 .Subscribe(_ => Detect())
                 .AddTo(_compositeDisposable);
         }
-        public void StopDetecting()
-        {
+        public void StopDetecting() => 
             _compositeDisposable.Clear();
-        }
 
         private void Detect()
         {

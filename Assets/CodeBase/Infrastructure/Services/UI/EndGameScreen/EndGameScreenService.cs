@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Infrastructure.Services.GameStats;
+﻿using CodeBase.Infrastructure.Services.GameStats;
 using CodeBase.Infrastructure.StateMachine;
 using CodeBase.Infrastructure.StateMachine.States;
 using TMPro;

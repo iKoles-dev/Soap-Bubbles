@@ -10,10 +10,8 @@ namespace CodeBase
         private GameLoopStateMachine _gameLoopStateMachine;
 
         [Inject]
-        private void Construct(GameLoopStateMachine gameLoopStateMachine)
-        {
+        private void Construct(GameLoopStateMachine gameLoopStateMachine) => 
             _gameLoopStateMachine = gameLoopStateMachine;
-        }
 
         private void Start() => 
             _gameLoopStateMachine.Enter<GameLoadState>();

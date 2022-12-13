@@ -1,8 +1,8 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
-using CodeBase.Infrastructure.Services.TapToStart;
 using CodeBase.Infrastructure.Services.UI.CountDownTimer;
 using CodeBase.Infrastructure.Services.UI.DeathCounter;
 using CodeBase.Infrastructure.Services.UI.EndGameScreen;
+using CodeBase.Infrastructure.Services.UI.TapToStart;
 using Zenject;
 
 namespace CodeBase.Infrastructure.ContextInstallers
