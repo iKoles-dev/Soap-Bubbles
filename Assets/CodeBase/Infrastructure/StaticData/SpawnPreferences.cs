@@ -10,5 +10,7 @@ namespace CodeBase.Infrastructure.StaticData
         public float MaxSpeed;
         public float MinSize;
         public float MaxSize;
+        public float MinPoints;
+        public float MaxPoints;
     }
 }

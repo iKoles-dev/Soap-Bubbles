@@ -17,3 +17,5 @@ MonoBehaviour:
   MaxSpeed: 2
   MinSize: 0.5
   MaxSize: 1.5
+  MinPoints: 0.5
+  MaxPoints: 3

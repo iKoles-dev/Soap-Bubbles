@@ -1,6 +1,4 @@
-﻿using CodeBase.Infrastructure.Services.BubblesHolder;
-using CodeBase.Infrastructure.Services.ImpactSpawner;
-using CodeBase.Infrastructure.Services.UI.DeathCounter;
+﻿using CodeBase.Infrastructure.Services.BubbleDeath;
 using CodeBase.SoapBubble;
 using UniRx;
 using UnityEngine;
@@ -9,19 +7,15 @@ namespace CodeBase.Infrastructure.Services.ClickDetector
 {
     public class ClickDetectorService
     {
+        private readonly BubbleDeathService _bubbleDeathService;
         private const float MaxRayDistance = 10;
-        private readonly BubblesHolderService _bubblesHolderService;
-        private readonly ImpactSpawnerService _impactSpawnerService;
-        private readonly ICounter _deathCounter;
         private readonly Camera _camera;
         private readonly RaycastHit[] _raycastHits = new RaycastHit[20];
         private readonly CompositeDisposable _compositeDisposable = new();
 
-        public ClickDetectorService(BubblesHolderService bubblesHolderService, ImpactSpawnerService impactSpawnerService, ICounter deathCounter)
+        public ClickDetectorService(BubbleDeathService bubbleDeathService)
         {
-            _bubblesHolderService = bubblesHolderService;
-            _impactSpawnerService = impactSpawnerService;
-            _deathCounter = deathCounter;
+            _bubbleDeathService = bubbleDeathService;
             _camera = Camera.main;
         }
         public void StartDetecting()
@@ -47,9 +41,7 @@ namespace CodeBase.Infrastructure.Services.ClickDetector
                     RaycastHit hit = _raycastHits[i];
                     if (hit.collider.TryGetComponent(out Bubble bubble))
                     {
-                        _bubblesHolderService.Remove(bubble.ComponentsHolder);
-                        _impactSpawnerService.Spawn(bubble.ComponentsHolder.Transform.position);
-                        _deathCounter.Increment();
+                        _bubbleDeathService.KillBubble(bubble);
                     }
                 }
             }

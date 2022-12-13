@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.Services.TapToStart;
 using CodeBase.Infrastructure.Services.UI.CountDownTimer;
 using CodeBase.Infrastructure.Services.UI.DeathCounter;
+using CodeBase.Infrastructure.Services.UI.EndGameScreen;
 using Zenject;
 
 namespace CodeBase.Infrastructure.ContextInstallers
@@ -13,7 +14,14 @@ namespace CodeBase.Infrastructure.ContextInstallers
             BindTapToStart();
             BindDeathCounter();
             BindCountDownTimer();
+            BindEndGameScreen();
         }
+
+        private void BindEndGameScreen() =>
+            Container
+                .BindInterfacesAndSelfTo<EndGameScreenService>()
+                .FromComponentInNewPrefabResource(AssetPath.EndGameScreen)
+                .AsSingle();
 
         private void BindDeathCounter() =>
             Container

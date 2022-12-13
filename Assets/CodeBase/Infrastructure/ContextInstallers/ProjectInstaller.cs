@@ -1,15 +1,17 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.ObjectPools;
+using CodeBase.Infrastructure.Services.BubbleDeath;
+using CodeBase.Infrastructure.Services.BubbleParametresRandomizer;
 using CodeBase.Infrastructure.Services.BubblesHolder;
 using CodeBase.Infrastructure.Services.BubbleSpawner;
 using CodeBase.Infrastructure.Services.ClickDetector;
 using CodeBase.Infrastructure.Services.GameSpeedMultiplier;
+using CodeBase.Infrastructure.Services.GameStats;
 using CodeBase.Infrastructure.Services.ImpactSpawner;
 using CodeBase.Infrastructure.Services.Move;
 using CodeBase.Infrastructure.Services.OutScreenPositioner;
 using CodeBase.Infrastructure.Services.OutScreenRemover;
-using CodeBase.Infrastructure.Services.SizeRandomizer;
 using CodeBase.Infrastructure.StaticData;
 using Zenject;
 
@@ -25,7 +27,7 @@ namespace CodeBase.Infrastructure.ContextInstallers
             BindBubbleSpawner();
             BindSpawnerPreferences();
             BindOutScreenPositioner();
-            BindSizeRandomizer();
+            BindBubbleParametresRandomizer();
             BindGamePreferences();
             BindGameSpeedMultiplier();
             BindBubbleFactory();
@@ -34,7 +36,19 @@ namespace CodeBase.Infrastructure.ContextInstallers
             BindOutScreenRemover();
             BindImpactPool();
             BindImpactSpawner();
+            BindBubbleDeathService();
+            BindGameStats();
         }
+
+        private void BindGameStats() =>
+            Container
+                .BindInterfacesAndSelfTo<GameStatsService>()
+                .AsSingle();
+
+        private void BindBubbleDeathService() =>
+            Container
+                .BindInterfacesAndSelfTo<BubbleDeathService>()
+                .AsSingle();
 
 
         private void BindBubblesHolder() =>
@@ -79,9 +93,9 @@ namespace CodeBase.Infrastructure.ContextInstallers
                 .BindInterfacesAndSelfTo<OutScreenPositionerService>()
                 .AsSingle();
 
-        private void BindSizeRandomizer() =>
+        private void BindBubbleParametresRandomizer() =>
             Container
-                .BindInterfacesAndSelfTo<SizeAndSpeedRandomizerService>()
+                .BindInterfacesAndSelfTo<BubbleParametresRandomizerService>()
                 .AsSingle();
 
         private void BindGamePreferences() =>

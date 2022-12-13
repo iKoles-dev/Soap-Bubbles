@@ -1,6 +1,6 @@
 ﻿using CodeBase.Infrastructure.ObjectPools;
+using CodeBase.Infrastructure.Services.BubbleParametresRandomizer;
 using CodeBase.Infrastructure.Services.OutScreenPositioner;
-using CodeBase.Infrastructure.Services.SizeRandomizer;
 using CodeBase.SoapBubble;
 
 namespace CodeBase.Infrastructure.Factories
@@ -9,18 +9,18 @@ namespace CodeBase.Infrastructure.Factories
     {
         private readonly BubblePool _bubblePool;
         private readonly OutScreenPositionerService _outScreenPositionerService;
-        private readonly SizeAndSpeedRandomizerService _sizeAndSpeedRandomizerService;
+        private readonly BubbleParametresRandomizerService _bubbleParametresRandomizerService;
 
-        public BubbleFactory(BubblePool bubblePool, OutScreenPositionerService outScreenPositionerService, SizeAndSpeedRandomizerService sizeAndSpeedRandomizerService)
+        public BubbleFactory(BubblePool bubblePool, OutScreenPositionerService outScreenPositionerService, BubbleParametresRandomizerService bubbleParametresRandomizerService)
         {
             _bubblePool = bubblePool;
             _outScreenPositionerService = outScreenPositionerService;
-            _sizeAndSpeedRandomizerService = sizeAndSpeedRandomizerService;
+            _bubbleParametresRandomizerService = bubbleParametresRandomizerService;
         }
         public ComponentsHolder CreateBubble()
         {
             ComponentsHolder bubble = _bubblePool.Get();
-            _sizeAndSpeedRandomizerService.RandomizeSizeAndSpeed(bubble);
+            _bubbleParametresRandomizerService.RandomizeParametresSpeed(bubble);
             _outScreenPositionerService.SetPosition(bubble);
             return bubble;
         }
