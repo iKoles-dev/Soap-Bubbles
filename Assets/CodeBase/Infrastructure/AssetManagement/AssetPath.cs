@@ -8,5 +8,6 @@
         public const string GamePreferences = "Preferences/GamePreferences";
         public const string VFXImpact = "VFX/Impact";
         public const string DeathCounter = "UI/DeathCounter";
+        public const string CountDownTimer = "UI/CountDownTimer";
     }
 }

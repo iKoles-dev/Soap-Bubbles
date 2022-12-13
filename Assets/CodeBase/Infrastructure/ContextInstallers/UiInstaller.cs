@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.TapToStart;
+using CodeBase.Infrastructure.Services.UI.CountDownTimer;
 using CodeBase.Infrastructure.Services.UI.DeathCounter;
 using Zenject;
 
@@ -9,8 +10,9 @@ namespace CodeBase.Infrastructure.ContextInstallers
     {
         public override void InstallBindings()
         {
-            BinTapToStart();
+            BindTapToStart();
             BindDeathCounter();
+            BindCountDownTimer();
         }
 
         private void BindDeathCounter() =>
@@ -19,10 +21,16 @@ namespace CodeBase.Infrastructure.ContextInstallers
                 .FromComponentInNewPrefabResource(AssetPath.DeathCounter)
                 .AsSingle();
 
-        private void BinTapToStart() =>
+        private void BindTapToStart() =>
             Container
                 .BindInterfacesAndSelfTo<TapToStartService>()
                 .FromComponentInNewPrefabResource(AssetPath.TapToStart)
+                .AsSingle();
+
+        private void BindCountDownTimer() =>
+            Container
+                .BindInterfacesAndSelfTo<CountDownTimerService>()
+                .FromComponentInNewPrefabResource(AssetPath.CountDownTimer)
                 .AsSingle();
     }
 }
